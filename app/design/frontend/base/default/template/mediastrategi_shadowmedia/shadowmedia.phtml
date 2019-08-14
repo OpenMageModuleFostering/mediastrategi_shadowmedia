@@ -1,0 +1,10 @@
+<?php if ($this->getIsActive()): ?>
+<?php if (!$this->getCookie()): ?>
+<?php $this->setCookie(); ?>
+<div class="sm_backdrop"></div>
+<div id="shadowmedia" class="sm_box">
+    <div class="sm_close"></div>
+    <div><?php echo $this->getContent(); ?></div>
+</div>
+<?php endif; ?>
+<?php endif; ?>
