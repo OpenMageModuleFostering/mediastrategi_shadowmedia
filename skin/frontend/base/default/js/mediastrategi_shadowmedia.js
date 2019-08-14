@@ -1,4 +1,4 @@
-// Create an immediately invoked functional expression to wrap our code
+
 (function() {
 
   // Define our constructor
@@ -23,7 +23,7 @@
       overlay: true
     };
 
-    // Create options by extending defaults with the passed in arugments
+    // Create options by extending defaults with the passed in arguments
     if (arguments[0] && typeof arguments[0] === "object") {
       this.options = extendDefaults(defaults, arguments[0]);
     }
@@ -127,15 +127,12 @@
   }
 
   function initializeEvents() {
-
     if (this.closeButton) {
       this.closeButton.addEventListener('click', this.close.bind(this));
     }
-
     if (this.overlay) {
       this.overlay.addEventListener('click', this.close.bind(this));
     }
-
   }
 
   function transitionSelect() {

@@ -19,7 +19,7 @@
 }
 
 .shadowmedia-modal {
-  position: fixed;
+  position: absolute;
   z-index: 9999;
   top: 50%;
   left: 50%;
@@ -44,7 +44,8 @@
   max-width: 100%;
 }
 
-.shadowmedia-modal.shadowmedia-open.shadowmedia-anchored {
+.shadowmedia-modal.default.shadowmedia-open.shadowmedia-anchored,
+.shadowmedia-modal.fade-and-drop-from-top.shadowmedia-open.shadowmedia-anchored {
   top: 20px;
   -webkit-transform: translate(-50%, 0);
   -moz-transform: translate(-50%, 0);
