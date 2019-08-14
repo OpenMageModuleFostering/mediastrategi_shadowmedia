@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Mediastrategi_Shadowmedia>
-            <version>0.5.2</version>
+            <version>0.5.3</version>
         </Mediastrategi_Shadowmedia>
     </modules>
     <global>
@@ -44,6 +44,7 @@
                 <close>#39C</close>
                 <max-width>600</max-width>
                 <min-width>280</min-width>
+                <fixed>yes</fixed>
             </design>
             <cookie>
                 <timeout>30</timeout>

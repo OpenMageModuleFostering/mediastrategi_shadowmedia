@@ -20,6 +20,11 @@
 					}
 				}
 			<?php } ?>
+            <?php if ($this->getFixed() == "yes") : ?>
+                .shadowmedia-modal {
+                    position: fixed;;
+                }
+            <?php endif; ?>
 		</style>
 		<div id="shadowmedia">
 			<div><?php echo $this->getContent(); ?></div>

@@ -60,6 +60,14 @@ class Mediastrategi_Shadowmedia_Block_Shadowmedia
         );
     }
 
+    public function getFixed()
+    {
+        return Mage::getStoreConfig(
+            'mediastrategi_shadowmedia/design/fixed'
+        );
+    }
+
+
     public function getCloseBtnColor()
     {
         return Mage::getStoreConfig(
