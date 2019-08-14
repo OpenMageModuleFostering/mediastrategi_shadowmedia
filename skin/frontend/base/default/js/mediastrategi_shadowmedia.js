@@ -1,141 +1,148 @@
-/*global jQuery */
-/*jshint browser:true */
-/*!
-* FitVids 1.1
-*
-* Copyright 2013, Chris Coyier - http://css-tricks.com + Dave Rupert - http://daverupert.com
-* Credit to Thierry Koblentz - http://www.alistapart.com/articles/creating-intrinsic-ratios-for-video/
-* Released under the WTFPL license - http://sam.zoy.org/wtfpl/
-*
-*/
+// Create an immediately invoked functional expression to wrap our code
+(function() {
 
-(function( $ ){
+  // Define our constructor
+  this.Modal = function() {
 
-  "use strict";
+    // Create global element references
+    this.closeButton = null;
+    this.modal = null;
+    this.overlay = null;
 
-  $.fn.fitVids = function( options ) {
-    var settings = {
-      customSelector: null,
-      ignore: null,
+    // Determine proper prefix
+    this.transitionEnd = transitionSelect();
+
+    // Define option defaults
+    var defaults = {
+      autoOpen: false,
+      className: 'fade-and-drop-from-top',
+      closeButton: true,
+      content: "",
+      maxWidth: 600,
+      minWidth: 280,
+      overlay: true
     };
 
-    if(!document.getElementById('fit-vids-style')) {
-      // appendStyles: https://github.com/toddmotto/fluidvids/blob/master/dist/fluidvids.js
-      var head = document.head || document.getElementsByTagName('head')[0];
-      var css = '.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}';
-      var div = document.createElement('div');
-      div.innerHTML = '<p>x</p><style id="fit-vids-style">' + css + '</style>';
-      head.appendChild(div.childNodes[1]);
+    // Create options by extending defaults with the passed in arugments
+    if (arguments[0] && typeof arguments[0] === "object") {
+      this.options = extendDefaults(defaults, arguments[0]);
     }
 
-    if ( options ) {
-      $.extend( settings, options );
-    }
+    if(this.options.autoOpen === true)
+      this.open();
 
-    return this.each(function(){
-      var selectors = [
-        "iframe[src*='player.vimeo.com']",
-        "iframe[src*='youtube.com']",
-        "iframe[src*='youtube-nocookie.com']",
-        "iframe[src*='kickstarter.com'][src*='video.html']",
-        "object",
-        "embed"
-      ];
+  };
 
-      if (settings.customSelector) {
-        selectors.push(settings.customSelector);
-      }
+  // Public Methods
 
-      var ignoreList = '.fitvidsignore';
-
-      if(settings.ignore) {
-        ignoreList = ignoreList + ', ' + settings.ignore;
-      }
-
-      var $allVideos = $(this).find(selectors.join(','));
-      $allVideos = $allVideos.not("object object"); // SwfObj conflict patch
-      $allVideos = $allVideos.not(ignoreList); // Disable FitVids on this video.
-
-      $allVideos.each(function(){
-        var $this = $(this);
-        if($this.parents(ignoreList).length > 0) {
-          return; // Disable FitVids on this video.
-        }
-        if (this.tagName.toLowerCase() === 'embed' && $this.parent('object').length || $this.parent('.fluid-width-video-wrapper').length) { return; }
-        if ((!$this.css('height') && !$this.css('width')) && (isNaN($this.attr('height')) || isNaN($this.attr('width'))))
-        {
-          $this.attr('height', 9);
-          $this.attr('width', 16);
-        }
-        var height = ( this.tagName.toLowerCase() === 'object' || ($this.attr('height') && !isNaN(parseInt($this.attr('height'), 10))) ) ? parseInt($this.attr('height'), 10) : $this.height(),
-            width = !isNaN(parseInt($this.attr('width'), 10)) ? parseInt($this.attr('width'), 10) : $this.width(),
-            aspectRatio = height / width;
-        if(!$this.attr('id')){
-          var videoID = 'fitvid' + Math.floor(Math.random()*999999);
-          $this.attr('id', videoID);
-        }
-        $this.wrap('<div class="fluid-width-video-wrapper"></div>').parent('.fluid-width-video-wrapper').css('padding-top', (aspectRatio * 100)+"%");
-        $this.removeAttr('height').removeAttr('width');
-      });
+  Modal.prototype.close = function() {
+    var _ = this;
+    this.modal.className = this.modal.className.replace(" shadowmedia-open", "");
+    this.overlay.className = this.overlay.className.replace(" shadowmedia-open",
+      "");
+    this.modal.addEventListener(this.transitionEnd, function() {
+      _.modal.parentNode.removeChild(_.modal);
+    });
+    this.overlay.addEventListener(this.transitionEnd, function() {
+      if(_.overlay.parentNode) _.overlay.parentNode.removeChild(_.overlay);
     });
   };
-// Works with either jQuery or Zepto
-})( window.jQuery || window.Zepto );
 
-$.noConflict();
-jQuery(document).ready(function($){
-    var the_box = $('.sm_box');
-    $('.sm_backdrop, .sm_box').animate({'opacity':'.50'}, 300, 'linear');
-    the_box.animate({
-        'opacity': '1.00'
-    }, 300, 'linear');
-    $('.sm_backdrop, .sm_box').css('display', 'block');
+  Modal.prototype.open = function() {
+    buildOut.call(this);
+    initializeEvents.call(this);
+    window.getComputedStyle(this.modal).height;
+    this.modal.className = this.modal.className +
+    (this.modal.offsetHeight > window.innerHeight ?
+      " shadowmedia-open shadowmedia-anchored" : " shadowmedia-open");
+    this.overlay.className = this.overlay.className + " shadowmedia-open";
+    jQuery('.shadowmedia-content').fitVids();
+  };
 
-    $('.sm_close').click(function(){
-        close_box();
-    });
+  // Private Methods
 
-    $('.sm_backdrop').click(function(){
-        close_box();
-    });
+  function buildOut() {
 
-    the_box.fitVids();
+    var content, contentHolder, docFrag;
 
-    the_box.center();
-    $(window).resize(function() {
-        the_box.center();
-    })
-});
+    /*
+     * If content is an HTML string, append the HTML string.
+     * If content is a domNode, append its content.
+     */
 
-function close_box()
-{
-    jQuery('.sm_backdrop, .sm_box').animate({'opacity':'0'}, 300, 'linear', function(){
-        jQuery('.sm_backdrop, .sm_box').css('display', 'none');
-    });
-    stopVideo();
-}
-
-function stopVideo()
-{
-    var vids = jQuery('#shadowmedia iframe');
-    if ( vids.length > 0 )
-    {
-        vids.each(function( index ) {
-            var vid = jQuery( this );
-            var src = vid.attr('src');
-            vid.attr('src', '');
-        });
+    if (typeof this.options.content === "string") {
+      content = this.options.content;
+    } else {
+      content = this.options.content.innerHTML;
     }
-}
 
-// Alltid centrerad
-jQuery.fn.center = function()
-{
-    this.css('position', 'absolute');
-    this.css('top', Math.max(0, ((jQuery(window).height() - jQuery(this).outerHeight()) / 3.5) +
-                             jQuery(window).scrollTop()) + 'px');
-    this.css('left', Math.max(0, ((jQuery(window).width() - jQuery(this).outerWidth()) / 2) +
-                              jQuery(window).scrollLeft()) + 'px');
-    return this;
-}
+    // Create a DocumentFragment to build with
+    docFrag = document.createDocumentFragment();
 
+    // Create modal element
+    this.modal = document.createElement("div");
+    this.modal.className = "shadowmedia-modal " + this.options.className;
+    this.modal.style.minWidth = this.options.minWidth + "px";
+    this.modal.style.maxWidth = this.options.maxWidth + "px";
+
+    // If closeButton option is true, add a close button
+    if (this.options.closeButton === true) {
+      this.closeButton = document.createElement("button");
+      this.closeButton.className = "shadowmedia-close close-button";
+      this.closeButton.innerHTML = "&times;";
+      this.modal.appendChild(this.closeButton);
+    }
+
+    // If overlay is true, add one
+    if (this.options.overlay === true) {
+      this.overlay = document.createElement("div");
+      this.overlay.className = "shadowmedia-overlay " + this.options.className;
+      docFrag.appendChild(this.overlay);
+    }
+
+    // Create content area and append to modal
+    contentHolder = document.createElement("div");
+    contentHolder.className = "shadowmedia-content";
+    contentHolder.innerHTML = content;
+    this.modal.appendChild(contentHolder);
+
+    // Append modal to DocumentFragment
+    docFrag.appendChild(this.modal);
+
+    // Append DocumentFragment to body
+    document.body.appendChild(docFrag);
+
+  }
+
+  function extendDefaults(source, properties) {
+    var property;
+    for (property in properties) {
+      if (properties.hasOwnProperty(property)) {
+        source[property] = properties[property];
+      }
+    }
+    return source;
+  }
+
+  function initializeEvents() {
+
+    if (this.closeButton) {
+      this.closeButton.addEventListener('click', this.close.bind(this));
+    }
+
+    if (this.overlay) {
+      this.overlay.addEventListener('click', this.close.bind(this));
+    }
+
+  }
+
+  function transitionSelect() {
+    var el = document.createElement("div");
+    if (el.style.WebkitTransition)
+      return "webkitTransitionEnd";
+    if (el.style.OTransition)
+      return "oTransitionEnd";
+    return 'transitionend';
+  }
+
+}());

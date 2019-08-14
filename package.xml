@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
     <name>Mediastrategi_Shadowmedia</name>
-    <version>0.4.0</version>
+    <version>0.5.0</version>
     <stability>stable</stability>
     <license uri="http://www.mediastrategi.se/license/">Mediastrategi EULA</license>
     <channel>community</channel>
@@ -14,16 +14,15 @@ You can also choose how often the lightbox will appear for returning visitors us
 This is the perfect extensions when you want to promote a special event, campaign or have something important that you want to say to your visitors!&#xD;
 &#xD;
 Features - Lite version:&#xD;
-&#xD;
-&#x2022;	Responsive lightbox&#xD;
-&#x2022;	Possible to show, text, images and movies using the Magento text editor&#xD;
-&#x2022;	Add links and set destination url (used for banners, text etc)&#xD;
-&#x2022;	Set interval parameters for the lightbox to control when it will appear again for returning visitors</description>
-    <notes>Initial release.</notes>
+- Responsive lightbox&#xD;
+- Possible to show, text, images and movies - using the Magento text editor&#xD;
+- Add links and set destination url (used for banners, text etc)&#xD;
+- Set interval parameters for the lightbox to control when it will appear again for returning visitors</description>
+    <notes>New design and more features also bug fixes</notes>
     <authors><author><name>Mediastrategi</name><user>mediastrategi</user><email>support@mediastrategi.se</email></author></authors>
-    <date>2014-05-22</date>
-    <time>09:14:17</time>
-    <contents><target name="magelocal"><dir name="Mediastrategi"><dir name="Shadowmedia"><dir name="Block"><dir name="Adminhtml"><dir name="System"><dir name="Config"><file name="Editor.php" hash="7bcbaaa0d041f2d83b7da33e0a5cfe90"/></dir></dir></dir><file name="Shadowmedia.php" hash="3ab6e8dfc3c5a7332dafeb7fa9afa772"/></dir><dir name="Model"><dir name="Source"><file name="Units.php" hash="927b4c0ed8fdfaca32526e860a6f0537"/></dir></dir><dir name="etc"><file name="adminhtml.xml" hash="06ce8a89fff0363f612c1f61ff172cd7"/><file name="config.xml" hash="27358bc3b00826035d670056ebcceaf9"/><file name="system.xml" hash="143d4dd4ae2bf0c7b3b4467c9f05953a"/></dir></dir></dir></target><target name="mageskin"><dir name="frontend"><dir name="base"><dir name="default"><dir name="css"><file name="mediastrategi_shadowmedia.css" hash="51a6727e2b4fde220716603d1961c76f"/></dir><dir name="js"><file name="mediastrategi_shadowmedia.js" hash="665f03786379ee8e99181f0582776db1"/><file name="jquery-1.10.2.min.js" hash="628072e7212db1e8cdacb22b21752cda"/><file name="jquery-1.10.2.min.map" hash="6c3ccfc221d36777d383b6e04d0b8af9"/></dir><dir name="images"><dir name="mediastrategi_shadowmedia"><file name="close.png" hash="8539b3d9600fd90dbcf4b6138292593a"/></dir></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Mediastrategi_Shadowmedia.xml" hash="13b51e1e41f4456e4de03147c28849f1"/></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="mediastrategi_shadowmedia.xml" hash="3a8136f73342f4e39192087a0894f1eb"/></dir><dir name="template"><dir name="mediastrategi_shadowmedia"><file name="shadowmedia.phtml" hash="77e3f2a58d556bff88e568d6b1c016db"/></dir></dir></dir></dir></dir><dir name="adminhtml"><dir name="default"><dir name="default"><dir name="layout"><file name="mediastrategi_shadowmedia.xml" hash="9483ee317d8ccdec6b6b77869aabbfa4"/></dir></dir></dir></dir></target></contents>
+    <date>2015-02-12</date>
+    <time>08:45:27</time>
+    <contents><target name="magelocal"><dir name="Mediastrategi"><dir name="Shadowmedia"><dir name="Block"><dir name="Adminhtml"><dir name="System"><dir name="Config"><file name="Editor.php" hash="7bcbaaa0d041f2d83b7da33e0a5cfe90"/></dir></dir></dir><file name="Shadowmedia.php" hash="0793b18520511a4cf1a21c30b5061682"/></dir><dir name="Model"><dir name="Source"><file name="Effects.php" hash="ddaed5d721806280230a83d4a541562a"/><file name="Units.php" hash="927b4c0ed8fdfaca32526e860a6f0537"/></dir></dir><dir name="etc"><file name="adminhtml.xml" hash="06ce8a89fff0363f612c1f61ff172cd7"/><file name="config.xml" hash="56bd104a2828fba5390299a2329a9c60"/><file name="system.xml" hash="938b01da21afac4628c46a12e2c72069"/></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Mediastrategi_Shadowmedia.xml" hash="13b51e1e41f4456e4de03147c28849f1"/></dir></target><target name="magedesign"><dir name="adminhtml"><dir name="default"><dir name="default"><dir name="layout"><file name="mediastrategi_shadowmedia.xml" hash="9483ee317d8ccdec6b6b77869aabbfa4"/></dir></dir></dir></dir><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="mediastrategi_shadowmedia.xml" hash="55e74af26a614922237ef2ff12382e5f"/></dir><dir name="template"><dir name="mediastrategi_shadowmedia"><file name="shadowmedia.phtml" hash="d804fb32ff2f52d2d30bb7c08d2564de"/></dir></dir></dir></dir></dir></target><target name="mageskin"><dir name="frontend"><dir name="base"><dir name="default"><dir name="css"><file name="mediastrategi_shadowmedia.css" hash="55144813e2e70d9354698fa452a5e44a"/></dir><dir name="js"><file name="mediastrategi_shadowmedia.js" hash="47dd158ce0edaa3d1b45dee761e5834d"/><file name="jquery.fitvids.js" hash="3f9f554c9070bbcf1f12e8e746ab2b47"/></dir><dir name="images"><dir name="mediastrategi_shadowmedia"><file name="close.png" hash="8539b3d9600fd90dbcf4b6138292593a"/></dir></dir></dir></dir></dir></target></contents>
     <compatible/>
     <dependencies><required><php><min>5.2.0</min><max>6.0.0</max></php></required></dependencies>
 </package>

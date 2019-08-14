@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Mediastrategi_Shadowmedia>
-            <version>0.0.1</version>
+            <version>0.5.0</version>
         </Mediastrategi_Shadowmedia>
     </modules>
     <global>
@@ -39,6 +39,12 @@
     </adminhtml>
     <default>
         <mediastrategi_shadowmedia>
+            <design>
+                <effect>fade-in-out</effect>
+                <close>#39C</close>
+                <max-width>600</max-width>
+                <min-width>280</min-width>
+            </design>
             <cookie>
                 <timeout>30</timeout>
                 <units>seconds</units>

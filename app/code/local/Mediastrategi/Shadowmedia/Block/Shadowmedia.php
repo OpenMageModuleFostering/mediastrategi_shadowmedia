@@ -13,8 +13,12 @@ class Mediastrategi_Shadowmedia_Block_Shadowmedia
         'years'     => 29030400
     );
 
-    public function __construct() {
-        Mage::Log('test');
+    public function _prepareLayout()
+    {
+        if (Mage::getSingleton('cms/wysiwyg_config')->isEnabled() && ($block = $this->getLayout()->getBlock('head'))) {
+            $this->setCanLoadTinyMce(true);
+        }
+        return parent::_prepareLayout();
     }
 
     public function getIsActive()
@@ -42,8 +46,38 @@ class Mediastrategi_Shadowmedia_Block_Shadowmedia
 
     public function getContent()
     {
+        $helper = Mage::helper('cms');
+        $processor = $helper->getBlockTemplateProcessor();
+        $content = Mage::getStoreConfig('mediastrategi_shadowmedia/content/content');
+        $html = $processor->filter($content);
+        echo $html;
+    }
+
+    public function getEffect()
+    {
         return Mage::getStoreConfig(
-            'mediastrategi_shadowmedia/content/content'
+          'mediastrategi_shadowmedia/design/effect'
+        );
+    }
+
+    public function getCloseBtnColor()
+    {
+        return Mage::getStoreConfig(
+          'mediastrategi_shadowmedia/design/close'
+        );
+    }
+
+    public function getMaxWidth()
+    {
+        return Mage::getStoreConfig(
+          'mediastrategi_shadowmedia/design/max-width'
+        );
+    }
+
+    public function getMinWidth()
+    {
+        return Mage::getStoreConfig(
+          'mediastrategi_shadowmedia/design/min-width'
         );
     }
 

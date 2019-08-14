@@ -4,7 +4,7 @@
         <reference name="head">
             <action method="addItem">
                 <type>skin_js</type>
-                <script>js/jquery-1.10.2.min.js</script>
+                <script>js/jquery.fitvids.js</script>
             </action>
             <action method="addItem">
                 <type>skin_js</type>
