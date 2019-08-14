@@ -56,7 +56,9 @@
     (this.modal.offsetHeight > window.innerHeight ?
       " shadowmedia-open shadowmedia-anchored" : " shadowmedia-open");
     this.overlay.className = this.overlay.className + " shadowmedia-open";
-    jQuery('.shadowmedia-content').fitVids();
+    if (typeof jQuery != 'undefined') {
+      jQuery('.shadowmedia-content').fitVids();
+    }
   };
 
   // Private Methods
@@ -146,3 +148,4 @@
   }
 
 }());
+

@@ -40,6 +40,10 @@
   background: #fff;
 }
 
+.shadowmedia-content img {
+  max-width: 100%;
+}
+
 .shadowmedia-modal.shadowmedia-open.shadowmedia-anchored {
   top: 20px;
   -webkit-transform: translate(-50%, 0);
