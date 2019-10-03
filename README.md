@@ -1,3 +1,5 @@
+
+
 ## Original Package Description
 
 Shadowmedia Lite for Magento is an extension that makes it possible to show a responsive lightbox with information. Show images, movies or text as visitors enters your shop from the front page or any other page in your shop. Just use the Magento text editor to add the information you need.
